@@ -15,33 +15,51 @@ updated: 2026-07-11
 |------|------|------|
 | 1 地基 | role-template / templates×8 / README / BOOTSTRAP | [x] commits 9829c6b + 7acdefe |
 | 2 管线型 role | design-jam / designer / explorer / planner / implementer / reviewer / art-spec / integrator | [x] commits 62f2759…305842f |
-| 3 守护型 + kickoff | arch-guard / num-smith / state-machine / ux-design 移植修缮;kickoff 新写 | [ ] |
+| 3 守护型 + kickoff | arch-guard / num-smith / state-machine / ux-design 移植修缮;kickoff 新写 | [x] commits 9ded5a4…(见 log) |
 | 4 回路 + 仪式(下)+ 常驻 | playtest / bugfix / release 新写;producer 移植修缮 | [ ] |
 | 5 命令接线 | 拷入 `~/.claude/skills/g-<name>/`;玩具项目端到端验证 | [ ] |
 
 ## 下一步
 
-**批 3:守护型 role 移植修缮 + kickoff 新写。** 逐个流程:
+**批 4:回路型 + 仪式型(下)+ 常驻型。** 逐个流程:
 
-1. **四守护 role**(`roles/guardian/`):底稿在 `G:/Claude/projects/Skills/` 下的
-   arch-guard / num-smith / state-machine-master / ux-design 四个 SKILL.md。
-   统一契约段用 `role-template.md` 母版(guardian 的 `<work_mode>` 含模式 A/B/逆推);
-   §5.4 修缮:四守护输入对称(arch-guard 补读 FEATURE-DESIGN);重叠定 owner
-   (转移表归 STATE-MACHINES,UX-MAP 只持屏幕清单;存档格式归 ARCHITECTURE 单一持有);
-   ux-design 交互状态词汇游戏化(default/focus/pause/transition/cutscene/gameover);
-   wikilink 等格式约定四 role 统一定一种;产物名对齐 `<KIND>-CHANGE-<NN>-<slug>`
-   (arch-guard 弃 REFACTOR 名)。
-2. **理论蒸馏**(§4.1):arch-guard = solid-in-godot + 状态所有权/依赖方向/故障边界
-   三原则 + 存档归属;num-smith = 资源流闭合六要素 + reward/difficulty;
-   state-machine = 十类 FSM 分类坐标系(fsm-index)+ game-state-and-flow;
-   ux-design = input-and-interaction + settings/tutorial/notification 三篇。
-   批 2 的蒸馏方法可复用:并行子代理读理论、返回可执行形态,再由主会话装配。
-3. **kickoff 新写**(`roles/ceremony/kickoff.md`):无底稿,按 DESIGN §6.1 详设写;
-   蒸馏 = 核心体验框架 + 目标玩家问题组 + 默认优先级/冲突流程 + 证据等级 +
-   v1 最小系统集裁剪(philosophy/foundation 三篇、conflict-resolution、system-map)。
-4. 每写完 1-2 个 role commit 一次;批 3 全完后更新本文件状态行与「下一步」。
+1. **playtest 新写**(`roles/loop/playtest.md`):无底稿,按 DESIGN §6.2 详设写。
+   两种模式:功能试玩(带 slug,占 HANDOFF 试玩行,产出 PLAYTEST.md)/ 整体调优
+   (不带 slug,产出 `harness/playtest/TUNE-<NN>-<topic>.md`)。规格+验收型人机回报
+   闭环;防自欺条款(至少一条证伪型问题)。蒸馏(§4.1):十二维测试清单
+   (process/quality/testing-checklist)+ 假设驱动试玩(philosophy/validation/
+   iteration-and-validation)+ 难度试玩维度(systems/progression/difficulty-and-challenge)。
+2. **bugfix 新写**(`roles/loop/bugfix.md`):按 DESIGN §6.3 详设写。九步流内嵌为
+   BUG.md checklist;不开 HANDOFF、不走 review;两个升级出口(守护 role / 升级为
+   feature)。蒸馏:九步 bug 流(process/workflow/bugfix-workflow)。
+3. **release 新写**(`roles/ceremony/release.md`):按 DESIGN §6.4 详设写。十步发布
+   流,人机回报闭环,产出 `harness/releases/<version>/RELEASE.md`。蒸馏:十步发布流
+   (process/workflow/release-workflow)+ 版本与迁移判据(systems/operations/
+   versioning-and-migration)。
+4. **producer 移植修缮**(`roles/standing/producer.md`):底稿 =
+   `G:/Claude/projects/Claude_Roles/roles/direction/` 下的 Producer 规范。修缮:
+   统一契约段;INBOX 捕获行统一格式(§5.3);功能完成判据/归档义务对齐 HANDOFF v2;
+   蒸馏(§4.1):里程碑=垂直切片判据(process/planning/roadmap-and-milestones)+
+   backlog 管理(backlog-management)+ DoR 作进 Now 门槛(quality/definition-of-ready)。
+5. 蒸馏方法照旧(并行子代理读理论、主会话装配);每写完 1-2 个 role commit 一次;
+   批 4 全完后更新本文件状态行与「下一步」。
 
-**批 2 实施备忘**(供批 3 保持一致):
+**批 3 实施备忘**(补充,批 4-5 保持一致):
+- 引用格式约定(四守护 + kickoff 已统一,后续 role 沿用):引用其他 role 一律写
+  `/g-xxx` 命令名,引用文件写反引号文件名,**不用 wikilink**。
+- guardian 统一契约段的两处偏差(四份一致,视为 guardian 变体):artifact_location
+  的 slug 规则改为"slug 可选,无 slug 即 cross-cutting";handoff duty 改为"有触发
+  feature 则回写其 HANDOFF,否则在 harness/<dir>/ 顶部留一行索引"。
+- 守护 role 专属蒸馏段命名:`<arch_judgment>` / `<balance_judgment>` /
+  `<state_judgment>` / `<ux_judgment>`;kickoff 用 `<kickoff_judgment>`。
+- ceremony 型(kickoff)无 slug、只产常驻文件;its signoff 指向 BOOTSTRAP 阶段 3
+  首棒(/g-arch-guard),先打印完整仪式清单再给交棒行。
+- ux-design 交互状态词汇最终以理论 Input Context 枚举为底(gameplay/menu/modal/
+  targeting/text-entry/tutorial),加整理态(pause/cutscene/transition/loading/
+  gameover,标 ※ 注明非原文枚举),替换 DESIGN 原拟的 default/focus 系词汇——
+  与理论同源优先。
+
+**批 2 实施备忘**(供后续批保持一致):
 - role 文件 = 裸 XML 段,顺序照 role-template;蒸馏块放 `<theory>` 之后的
   role 专属段(`<design_judgment>` / `<planning_judgment>` / `<pitfall_index>` /
   `<review_axes>` / `<asset_discipline>` / `<import_discipline>` 这类命名)。
