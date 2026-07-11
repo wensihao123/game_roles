@@ -116,7 +116,7 @@ Game_Roles/
 
 ### 4.1 第一层:蒸馏内嵌
 
-嵌入 role/skill spec 的不是理论原文,而是**可执行形态**(检查清单、判断七问、决策路由表)。每段蒸馏内容标注 `蒸馏自 GameDesignDocs/<path> @ <YYYY-MM>`,理论大改后 grep 日期戳即知哪些 spec 要重蒸馏。
+嵌入 role spec 的不是理论原文,而是**可执行形态**(检查清单、判断七问、决策路由表)。每段蒸馏内容标注 `蒸馏自 GameDesignDocs/<path> @ <YYYY-MM>`,理论大改后 grep 日期戳即知哪些 spec 要重蒸馏。
 
 理论库已全部完工,下表为全量对齐版(路径以 philosophy 子目录重组后为准):
 
