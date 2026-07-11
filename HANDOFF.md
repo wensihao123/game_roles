@@ -16,33 +16,43 @@ updated: 2026-07-11
 | 1 地基 | role-template / templates×8 / README / BOOTSTRAP | [x] commits 9829c6b + 7acdefe |
 | 2 管线型 role | design-jam / designer / explorer / planner / implementer / reviewer / art-spec / integrator | [x] commits 62f2759…305842f |
 | 3 守护型 + kickoff | arch-guard / num-smith / state-machine / ux-design 移植修缮;kickoff 新写 | [x] commits 9ded5a4…(见 log) |
-| 4 回路 + 仪式(下)+ 常驻 | playtest / bugfix / release 新写;producer 移植修缮 | [ ] |
+| 4 回路 + 仪式(下)+ 常驻 | playtest / bugfix / release 新写;producer 移植修缮 | [x] commits 9c7707d + 100cfd2 |
 | 5 命令接线 | 拷入 `~/.claude/skills/g-<name>/`;玩具项目端到端验证 | [ ] |
 
 ## 下一步
 
-**批 4:回路型 + 仪式型(下)+ 常驻型。** 逐个流程:
+**批 5:命令接线 + 端到端验证。**
 
-1. **playtest 新写**(`roles/loop/playtest.md`):无底稿,按 DESIGN §6.2 详设写。
-   两种模式:功能试玩(带 slug,占 HANDOFF 试玩行,产出 PLAYTEST.md)/ 整体调优
-   (不带 slug,产出 `harness/playtest/TUNE-<NN>-<topic>.md`)。规格+验收型人机回报
-   闭环;防自欺条款(至少一条证伪型问题)。蒸馏(§4.1):十二维测试清单
-   (process/quality/testing-checklist)+ 假设驱动试玩(philosophy/validation/
-   iteration-and-validation)+ 难度试玩维度(systems/progression/difficulty-and-challenge)。
-2. **bugfix 新写**(`roles/loop/bugfix.md`):按 DESIGN §6.3 详设写。九步流内嵌为
-   BUG.md checklist;不开 HANDOFF、不走 review;两个升级出口(守护 role / 升级为
-   feature)。蒸馏:九步 bug 流(process/workflow/bugfix-workflow)。
-3. **release 新写**(`roles/ceremony/release.md`):按 DESIGN §6.4 详设写。十步发布
-   流,人机回报闭环,产出 `harness/releases/<version>/RELEASE.md`。蒸馏:十步发布流
-   (process/workflow/release-workflow)+ 版本与迁移判据(systems/operations/
-   versioning-and-migration)。
-4. **producer 移植修缮**(`roles/standing/producer.md`):底稿 =
-   `G:/Claude/projects/Claude_Roles/roles/direction/` 下的 Producer 规范。修缮:
-   统一契约段;INBOX 捕获行统一格式(§5.3);功能完成判据/归档义务对齐 HANDOFF v2;
-   蒸馏(§4.1):里程碑=垂直切片判据(process/planning/roadmap-and-milestones)+
-   backlog 管理(backlog-management)+ DoR 作进 Now 门槛(quality/definition-of-ready)。
-5. 蒸馏方法照旧(并行子代理读理论、主会话装配);每写完 1-2 个 role commit 一次;
-   批 4 全完后更新本文件状态行与「下一步」。
+1. **接线**:17 个 role 各拷一份 `~/.claude/skills/g-<name>/SKILL.md`(DESIGN §7 批 5:
+   宿主载体是 Claude Code 的 skill 格式——需给每份加 SKILL.md frontmatter
+   (name/description),body = role 文件原文;本仓库为源、安装为副本,改源后重拷 +
+   `diff -q` 核对)。注意与旧体系 `/role-*`、`/design-jam` 等命令并存不冲突(`/g-` 前缀)。
+2. **端到端验证**(DESIGN §7 验证方式):建玩具 Godot 项目,照 BOOTSTRAP 走
+   `/g-kickoff → design-jam → designer → planner → implementer → reviewer →
+   art-spec → integrator → playtest → release`,外加一次 `/g-bugfix`;确认每个
+   交棒行可照抄执行、每个 artifact 冷启动可读。发现的 spec 缺陷记回本文件 flags。
+3. 全完后:更新本文件状态行;DESIGN.md 状态从「待审」转「决策存档」;README 若与
+   实况有出入一并勘正。
+
+**批 4 实施备忘**(补充,批 5 及后续维护保持一致):
+- **理论结构偏差如实标注**:三篇 process 理论的实际结构与 DESIGN §4.1 的简称不同——
+  testing-checklist 实为 **22 维**(非"十二维"),bugfix-workflow 实为 **13 阶段生命
+  周期**(九步是 solo 轻量通道上的收缩映射),release-workflow 实为 **11 阶段**(十步
+  同理)。三份 spec 的蒸馏段均在日期戳旁注明"原文为准 + 映射关系",不改模版的
+  九步/十步 checklist 本身。这不是理论疑点,是 DESIGN 写作时的预估简称;后续重蒸馏
+  以原文结构为准。
+- **单文件工作单元(BUG/RELEASE)的 role 不碰 feature HANDOFF**:理论疑点记在各自
+  账本节;bugfix/release 的 artifact_location 段照此写,视为 loop/ceremony 变体
+  (与 guardian 变体同理)。
+- playtest 双模式的 HANDOFF 义务不对称:功能试玩占试玩行;TUNE 模式不碰任何 HANDOFF,
+  产出自记 + 路由走 INBOX/escalation。TUNE 编号 = `harness/playtest/` 现存最大 NN+1。
+- playtest 防自欺条款落地为硬约束:每份脚本每条假设必有失败判据,且至少一条证伪型;
+  "两轮调不动就停"规则同时写进 playtest(参数)与 art-spec(重生成)——同构。
+- producer 是 mid_flow_capture 的**唯一例外**:会话中冒出的新想法当场分诊,不过
+  INBOX(自己排队自己清是空转);其余 16 role 照统一捕获段。
+- producer 蒸馏引入 DoR 六种裁决词(Ready / Ready with Conditions / Ready for
+  Prototype / Not Ready / Deferred / Rejected)与里程碑判据(单 Active、Outcome 表述、
+  Exit Criteria 可跑游戏验证);BACKLOG §1 扩为 v1 scope + 当前里程碑两行。
 
 **批 3 实施备忘**(补充,批 4-5 保持一致):
 - 引用格式约定(四守护 + kickoff 已统一,后续 role 沿用):引用其他 role 一律写
