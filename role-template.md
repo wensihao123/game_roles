@@ -1,6 +1,15 @@
 # Role Template — 17 个 role 共用的母版
 
 > 造新 role 时复制本文件,替换所有 `[方括号占位符]`,删掉不适用的可选段。
+> 落盘位置:`skills/g-<name>/SKILL.md`(源即安装形态),文件**最顶部**先加宿主
+> frontmatter(在下方 XML 段之前):
+>
+> ```yaml
+> ---
+> name: g-<name>
+> description: 扮演 <Role> role(Game_Roles 独游 harness,<模式>型):<一句话职责>。
+> ---
+> ```
 > **统一契约段**(所有 role 一字不差或只改 role 名):`<language>`、`<activation_handshake>`、
 > `<artifact_location>`、`<theory>`、`<mid_flow_capture>`、`<handoff_signoff>`。
 > **按 role 定制段**:`<role_identity>`、`<work_mode>`、`<core_objective>`、`<inputs>`、

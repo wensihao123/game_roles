@@ -163,12 +163,20 @@ role 按各自 escalation 停下上报。细则见 `templates/INBOX.md`。
 - `DESIGN.md` ........................ 设计决策全录(D1~D9、审计缺陷修法、蒸馏映射表)
 - `BOOTSTRAP.md` ..................... 新游戏铺地基 checklist
 - `role-template.md` ................. 17 role 共用母版(造新 role 时复制)
-- `roles/standing/` .................. producer
-- `roles/ceremony/` .................. kickoff、release
-- `roles/pipeline/` .................. design-jam、designer、explorer、planner、implementer、reviewer、art-spec、integrator
-- `roles/loop/` ...................... playtest、bugfix
-- `roles/guardian/` .................. arch-guard、num-smith、state-machine、ux-design
+- `skills/g-<name>/SKILL.md` ......... 17 个 role,一 role 一目录,**源即安装形态**
+  (常驻:producer;仪式:kickoff、release;管线:design-jam、designer、explorer、
+  planner、implementer、reviewer、art-spec、integrator;回路:playtest、bugfix;
+  守护:arch-guard、num-smith、state-machine、ux-design——工作模式看各文件
+  `<work_mode>` 段与上方模式表)
 - `templates/` ....................... 复制进游戏项目的骨架(project-context、GAME-BRIEF、HANDOFF、INBOX、BUG、RELEASE、artifact-frontmatter、style-basic-2d)
 
-安装:每个 role 拷为 `~/.claude/skills/g-<name>/SKILL.md`(本仓库为源、安装为副本,
-改源后重拷 + `diff -q` 核对;宿主载体是 Claude Code 的 skill 格式,那只是安装机制)。
+安装:`skills/` 已是安装形态(每个 role 自带 SKILL.md frontmatter),整目录拷进
+`~/.claude/skills/` 即可用:
+
+```
+cp -r skills/g-* ~/.claude/skills/     # Windows 资源管理器:把 skills/ 下的 g-* 文件夹全选拷过去
+```
+
+本仓库为源、安装为副本,改源后重拷,并核对:
+`for d in skills/g-*; do diff -q "$d/SKILL.md" ~/.claude/skills/"${d#skills/}"/SKILL.md; done`
+(宿主载体是 Claude Code 的 skill 格式,那只是安装机制,不是体系内分类)。

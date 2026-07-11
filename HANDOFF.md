@@ -23,10 +23,9 @@ updated: 2026-07-11
 
 **批 5:命令接线 + 端到端验证。**
 
-1. **接线**:17 个 role 各拷一份 `~/.claude/skills/g-<name>/SKILL.md`(DESIGN §7 批 5:
-   宿主载体是 Claude Code 的 skill 格式——需给每份加 SKILL.md frontmatter
-   (name/description),body = role 文件原文;本仓库为源、安装为副本,改源后重拷 +
-   `diff -q` 核对)。注意与旧体系 `/role-*`、`/design-jam` 等命令并存不冲突(`/g-` 前缀)。
+1. **接线**:已重构为源即安装形态(见小决策),人工把 `skills/` 下 17 个 `g-*`
+   目录整体拷进 `~/.claude/skills/` 即完成;改源后重拷 + 逐份 `diff -q` 核对。
+   注意与旧体系 `/role-*`、`/design-jam` 等命令并存不冲突(`/g-` 前缀)。
 2. **端到端验证**(DESIGN §7 验证方式):建玩具 Godot 项目,照 BOOTSTRAP 走
    `/g-kickoff → design-jam → designer → planner → implementer → reviewer →
    art-spec → integrator → playtest → release`,外加一次 `/g-bugfix`;确认每个
@@ -80,6 +79,11 @@ updated: 2026-07-11
   (tool-ready,无下游编译器);integrator 收尾指向 /g-playtest(试玩默认 gate)。
 
 ## 已定的实施级小决策(DESIGN 之外)
+
+- **仓库结构改为源即安装形态**(2026-07-11,偏离 DESIGN §3.2 的 `roles/<模式>/` 布局):
+  role 文件移至 `skills/g-<name>/SKILL.md`,顶部自带宿主 frontmatter(name/description),
+  `skills/` 整目录拷进 `~/.claude/skills/` 即可用,消灭"源与副本格式不同"的转换步骤。
+  五模式分类不再体现为目录,由 README 模式表 + 各文件 `<work_mode>` 段承担。
 
 - project-context §0 不复制 GAME-BRIEF 内容(支柱/范围唯一 owner 是 GAME-BRIEF),只放一句话 + 理论库路径。
 - BOOTSTRAP 阶段 1 明确 GAME-BRIEF 不复制空模版(由 kickoff 产出);BACKLOG/STYLE-BIBLE/四事实源不手建。
